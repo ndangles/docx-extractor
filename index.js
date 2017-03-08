@@ -40,7 +40,7 @@ exports.extractComments = function(filepath, callback) {
                                                     comments[i] = newComment; 
                                                 }catch(e){
                                                     
-                                                    callback(comments);
+                                                    return callback(comments);
                                                  }
                                                 }
                                             });
