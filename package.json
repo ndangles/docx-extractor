@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/ncd275/docx-extractor.git"
   },
-  "keywords": "test123x98yamwl",
+  "keywords": ["docx-extractor", "docx", "extractor", "comment extractor", "docx comments", "xml comments", "word document"],
   "author": "Nicholas Dangles",
   "license": "ISC",
   "bugs": {
