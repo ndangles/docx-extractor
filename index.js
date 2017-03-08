@@ -38,7 +38,7 @@ exports.extractComments = function(filepath) {
                                                     var newComment = test[0].replace(/\W/g, ' ');
                                                     comments[i] = newComment; 
                                                 }catch(e){
-                                                    return console.log("test"); //no more comments to parse, return 
+                                                    return console.log(comments); //no more comments to parse, return 
                                                     
                                                  }
                                                 }
