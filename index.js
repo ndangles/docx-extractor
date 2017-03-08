@@ -6,22 +6,15 @@ var jsonfile = require('jsonfile');
 var pointer = require('json-pointer');
 var parser = new xml2js.Parser()
 
-exports.extractComments = function(filename) {
-    var fstream;
-
-    fstream = fs.createWriteStream(__dirname + '/tmp/' + filename);
-        file.pipe(fstream);
-        fstream.on('close', function () {
-                
-            
+exports.extractComments = function(filename) {    
       
 
 	if(filename.indexOf(".docx")>-1){
                 var newFile = filename+'.zip';
-                fse.copy(__dirname+'/tmp/'+filename, __dirname+'/tmp/extdata/'+filename, function(err){
-                    fs.rename(__dirname+'/tmp/extdata/'+filename, __dirname+'/tmp/extdata/'+newFile, function(err) {
-                        fs.createReadStream(__dirname+'/tmp/extdata/'+newFile).pipe(unzip.Extract({ path: __dirname+'/tmp/extdata/'+filename})).on('close', function () {
-                            fs.readFile(__dirname + '/tmp/extdata/'+filename+'/word/comments.xml', function(err, data) {
+                fse.copy(__dirname+'/'+filename, __dirname+'/tmp/'+filename, function(err){
+                    fs.rename(__dirname+'/tmp/'+filename, __dirname+'/tmp/'+newFile, function(err) {
+                        fs.createReadStream(__dirname+'/tmp/'+newFile).pipe(unzip.Extract({ path: __dirname+'/tmp/'+filename})).on('close', function () {
+                            fs.readFile(__dirname + '/tmp/'+filename+'/word/comments.xml', function(err, data) {
                                  if(err){
                                     
                                     return console.log("This document does not appear to have any comments");
@@ -60,8 +53,6 @@ exports.extractComments = function(filename) {
           } else {
           return console.log("The file you are passing into the function is not a 'docx' file");
       }
-
-    });
 
 
 
