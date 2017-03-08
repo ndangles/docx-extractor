@@ -7,7 +7,7 @@ var jsonfile = require('jsonfile');
 var pointer = require('json-pointer');
 var parser = new xml2js.Parser()
 
-exports.extractComments = function(filepath) {    
+exports.extractComments = function(filepath, callback) {    
       
     var comments = [];
 
@@ -40,7 +40,7 @@ exports.extractComments = function(filepath) {
                                                     comments[i] = newComment; 
                                                 }catch(e){
                                                     
-                                                    
+                                                    callback(comments);
                                                  }
                                                 }
                                             });
@@ -55,7 +55,5 @@ exports.extractComments = function(filepath) {
           } else {
           return console.log("The file you are passing into the function is not a 'docx' file");
       }
-
-      return comments;
 
 }
