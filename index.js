@@ -9,6 +9,7 @@ var parser = new xml2js.Parser()
 
 exports.extractComments = function(filepath) {    
       
+    var comments = [];
 
 	if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
@@ -29,7 +30,7 @@ exports.extractComments = function(filepath) {
                                         jsonfile.writeFile(file, parsedData, function(err){
                                             jsonfile.readFile(file, function(err, obj) {
                                                 var jsonData = JSON.parse(obj);
-                                                var comments = [];
+                                                
 
                                                 for(i=0; i<2000; i++){
 
@@ -38,7 +39,7 @@ exports.extractComments = function(filepath) {
                                                     var newComment = test[0].replace(/\W/g, ' ');
                                                     comments[i] = newComment; 
                                                 }catch(e){
-                                                    return console.log(comments); //no more comments to parse, return 
+                                                    
                                                     
                                                  }
                                                 }
@@ -55,6 +56,6 @@ exports.extractComments = function(filepath) {
           return console.log("The file you are passing into the function is not a 'docx' file");
       }
 
-      return console.log("This got called");
+      return comments;
 
 }
