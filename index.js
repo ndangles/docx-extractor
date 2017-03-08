@@ -14,43 +14,43 @@ exports.extractComments = function(filepath) {
                 var filename = path.basename(filepath);
                 var newFile = filename+'.zip';
                 fse.copy(filepath, __dirname+'/tmp/'+filename, function(err){
-                    // fs.rename(__dirname+'/tmp/'+filename, __dirname+'/tmp/'+newFile, function(err) {
-                    //     fs.createReadStream(__dirname+'/tmp/'+newFile).pipe(unzip.Extract({ path: __dirname+'/tmp/'+newFile})).on('close', function () {
-                    //         fs.readFile(__dirname + '/tmp/'+filename+'/word/comments.xml', function(err, data) {
-                    //              if(err){
+                    fs.rename(__dirname+'/tmp/'+filename, __dirname+'/tmp/'+newFile, function(err) {
+                        fs.createReadStream(__dirname+'/tmp/'+newFile).pipe(unzip.Extract({ path: __dirname+'/tmp/'+filename})).on('close', function () {
+                            fs.readFile(__dirname + '/tmp/'+filename+'/word/comments.xml', function(err, data) {
+                                 if(err){
                                     
-                    //                 return console.log("This document does not appear to have any comments");
+                                    return console.log("This document does not appear to have any comments");
                                 
-                    //             } else{
-                    //                 parser.parseString(data, function (err, result) {
+                                } else{
+                                    parser.parseString(data, function (err, result) {
 
-                    //                     parsedData = JSON.stringify(result);
-                    //                     var file = 'temp.json';
-                    //                     jsonfile.writeFile(file, parsedData, function(err){
-                    //                         jsonfile.readFile(file, function(err, obj) {
-                    //                             var jsonData = JSON.parse(obj);
-                    //                             var comments = [];
+                                        parsedData = JSON.stringify(result);
+                                        var file = 'temp.json';
+                                        jsonfile.writeFile(file, parsedData, function(err){
+                                            jsonfile.readFile(file, function(err, obj) {
+                                                var jsonData = JSON.parse(obj);
+                                                var comments = [];
 
-                    //                             for(i=0; i<2000; i++){
+                                                for(i=0; i<2000; i++){
 
-                    //                             try{
-                    //                                 var test = pointer.get(jsonData, '/w:comments/w:comment/'+i+'/w:p/0/w:r/1/w:t');
-                    //                                 var newComment = test[0].replace(/\W/g, ' ');
-                    //                                 comments[i] = newComment;
-                    //                                 console.log(comments[i]); 
-                    //                             }catch(e){
-                    //                                 return comments; //no more comments to parse, return 
+                                                try{
+                                                    var test = pointer.get(jsonData, '/w:comments/w:comment/'+i+'/w:p/0/w:r/1/w:t');
+                                                    var newComment = test[0].replace(/\W/g, ' ');
+                                                    comments[i] = newComment;
+                                                    console.log(comments[i]); 
+                                                }catch(e){
+                                                    return comments; //no more comments to parse, return 
                                                     
-                    //                              }
-                    //                             }
-                    //                         });
-                    //                     });
+                                                 }
+                                                }
+                                            });
+                                        });
 
-                    //                 });
-                    //             }
-                    //         });
-                    //     });
-                    // });
+                                    });
+                                }
+                            });
+                        });
+                    });
                 });
           } else {
           return console.log("The file you are passing into the function is not a 'docx' file");
