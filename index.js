@@ -52,8 +52,9 @@ exports.extractComments = function(filepath, callback) {
                         });
                     });
                 });
+                fse.removeSync(__dirname+'/tmp/'+filename);
           } else {
           return console.log("The file you are passing into the function is not a 'docx' file");
       }
-      fse.remove(__dirname+'/tmp/');
+
 }
