@@ -7,6 +7,14 @@ var pointer = require('json-pointer');
 var parser = new xml2js.Parser()
 
 exports.extractComments = function(filename) {
+    var fstream;
+
+    fstream = fs.createWriteStream(__dirname + '/tmp/' + filename);
+        file.pipe(fstream);
+        fstream.on('close', function () {
+                
+            
+      
 
 	if(filename.indexOf(".docx")>-1){
                 var newFile = filename+'.zip';
@@ -53,7 +61,7 @@ exports.extractComments = function(filename) {
           return console.log("The file you are passing into the function is not a 'docx' file");
       }
 
-
+    });
 
 
 
