@@ -53,7 +53,7 @@ exports.extractComments = function(filepath, callback) {
                     });
                 });
 
-                fse.remove(__dirname+'/tmp');
+                fse.remove(__dirname+'/tmp/');
           } else {
           return console.log("The file you are passing into the function is not a 'docx' file");
       }
