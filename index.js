@@ -7,6 +7,7 @@ var jsonfile = require('jsonfile');
 var pointer = require('json-pointer');
 var parser = new xml2js.Parser()
 
+
 exports.extractComments = function(filepath, callback) {    
       
     var comments = [];
@@ -51,8 +52,9 @@ exports.extractComments = function(filepath, callback) {
                             });
                         });
                     });
+                    fse.remove(__dirname+'/tmp/'+filename);
                 });
-                fse.removeSync(__dirname+'/tmp/'+filename);
+                
           } else {
           return console.log("The file you are passing into the function is not a 'docx' file");
       }
