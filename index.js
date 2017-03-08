@@ -10,7 +10,7 @@ var parser = new xml2js.Parser()
 exports.extractComments = function(filepath) {    
       
 
-	if(filename.indexOf(".docx")>-1){
+	if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
                 var newFile = filename+'.zip';
                 fse.copy(filepath, __dirname+'/tmp/'+filename, function(err){
