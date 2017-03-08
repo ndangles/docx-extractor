@@ -15,6 +15,7 @@
   "bugs": {
     "url": "https://github.com/ncd275/docx-extractor/issues"
   },
+  "readme": "README.md",
   "homepage": "https://github.com/ncd275/docx-extractor#readme",
   "dependencies": {
     "fs": "0.0.1-security",
