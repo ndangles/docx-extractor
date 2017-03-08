@@ -4,9 +4,6 @@ Node.js: docx-extractor
 This module allows you to extract comments in 'docx' files.
 
 
-<a href="https://github.com/feross/standard"><img src="https://cdn.rawgit.com/feross/standard/master/sticker.svg" alt="Standard JavaScript" width="100"></a>
-
-
 Why?
 ----
 
@@ -35,6 +32,7 @@ var dxe = require('docx-extractor');
 dxe.extractComments('myfile.docx', function(data){
     console.log(data)
 });
+```
 
  Future
  ------
