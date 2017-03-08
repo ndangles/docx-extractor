@@ -36,8 +36,7 @@ exports.extractComments = function(filepath) {
                                                 try{
                                                     var test = pointer.get(jsonData, '/w:comments/w:comment/'+i+'/w:p/0/w:r/1/w:t');
                                                     var newComment = test[0].replace(/\W/g, ' ');
-                                                    comments[i] = newComment;
-                                                    console.log(comments[i]); 
+                                                    comments[i] = newComment; 
                                                 }catch(e){
                                                     return comments; //no more comments to parse, return 
                                                     
