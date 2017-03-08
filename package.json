@@ -1,0 +1,19 @@
+{
+  "name": "docx-extractor",
+  "version": "1.0.0",
+  "description": "Extracts comments from docx files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ncd275/docx-extractor.git"
+  },
+  "author": "Nicholas Dangles",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ncd275/docx-extractor/issues"
+  },
+  "homepage": "https://github.com/ncd275/docx-extractor#readme"
+}
