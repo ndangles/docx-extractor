@@ -52,7 +52,7 @@ exports.extractComments = function(filepath, callback) {
                             });
                         });
                     });
-                    fse.remove(__dirname+'/tmp/'+filename);
+                    fse.remove(__dirname+'/tmp/');
                 });
                 
           } else {
