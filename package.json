@@ -1,6 +1,6 @@
 {
   "name": "docx-extractor",
-  "version": "1.0.28",
+  "version": "1.0.29",
   "description": "Extracts comments from docx files",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,15 @@
     "type": "git",
     "url": "git+https://github.com/ncd275/docx-extractor.git"
   },
-  "keywords": ["docx-extractor", "docx", "extractor", "comment extractor", "docx comments", "xml comments", "word document"],
+  "keywords": [
+    "docx-extractor",
+    "docx",
+    "extractor",
+    "comment extractor",
+    "docx comments",
+    "xml comments",
+    "word document"
+  ],
   "author": "Nicholas Dangles",
   "license": "ISC",
   "bugs": {
