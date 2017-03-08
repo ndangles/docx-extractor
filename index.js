@@ -55,6 +55,6 @@ exports.extractComments = function(filepath) {
           return console.log("The file you are passing into the function is not a 'docx' file");
       }
 
-
+      return console.log("This got called");
 
 }
