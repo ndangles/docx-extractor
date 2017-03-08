@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/ncd275/docx-extractor/issues"
   },
-  "homepage": "https://github.com/ncd275/docx-extractor#readme"
+  "homepage": "https://github.com/ncd275/docx-extractor#readme",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "fs-extra": "^2.0.0",
+    "json-pointer": "^0.6.0",
+    "jsonfile": "^2.4.0",
+    "unzip": "^0.1.11",
+    "xml2js": "^0.4.17"
+  }
 }
