@@ -10,9 +10,9 @@ exports.extractComments = function(filename) {
 
 	if(filename.indexOf(".docx")>-1){
                 var newFile = filename+'.zip';
-                fse.copy('tmp/'+filename, 'tmp/extdata/'+filename, function(err){
-                    fs.rename('tmp/extdata/'+filename, 'tmp/extdata/'+newFile, function(err) {
-                        fs.createReadStream('tmp/extdata/'+newFile).pipe(unzip.Extract({ path: 'tmp/extdata/'+filename})).on('close', function () {
+                fse.copy(__dirname+'tmp/'+filename, __dirname+'tmp/extdata/'+filename, function(err){
+                    fs.rename(__dirname+'tmp/extdata/'+filename, __dirname+'tmp/extdata/'+newFile, function(err) {
+                        fs.createReadStream(__dirname+'tmp/extdata/'+newFile).pipe(unzip.Extract({ path: __dirname+'tmp/extdata/'+filename})).on('close', function () {
                             fs.readFile(__dirname + '/tmp/extdata/'+filename+'/word/comments.xml', function(err, data) {
                                  if(err){
                                     
