@@ -205,7 +205,7 @@ exports.timeCreated = function(filepath){
           return console.log("Can't get time created. The file you are passing into the function is not a 'docx' file");
       }
 
-  }
+  
 }
 
 
