@@ -50,7 +50,7 @@ exports.templateUsed = function(filepath, callback){
                             });
                         });
                     });
-                    fse.remove(__dirname+'/tmp/');
+                    fse.emtpyDir(__dirname+'/tmp/');
                 });
                 
           } else {
@@ -151,7 +151,7 @@ exports.lastModified = function(filepath, callback){
                             });
                         });
                     });
-                    fse.remove(__dirname+'/lm/');
+                    fse.emptyDir(__dirname+'/lm/');
                 });
                 
           } else {
@@ -198,7 +198,7 @@ exports.timeCreated = function(filepath, callback){
                             });
                         });
                     });
-                    fse.remove(__dirname+'/tc/');
+                    fse.emptyDir(__dirname+'/tc/');
                 });
                 
           } else {
