@@ -160,7 +160,7 @@ exports.lastModified = function(filepath){
 }
 
 exports.timeCreated = function(filepath){
-    fse.emptyDir(__dirname+'/tc/', function(err){
+    
     if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
                 var newFile = filename+'.zip';
