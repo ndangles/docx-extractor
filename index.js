@@ -183,7 +183,7 @@ exports.timeCreated = function(filepath, callback){
                                                 
 
                                                 try{
-                                                    var timeCreated = pointer.get(jsonData, '/cp:coreProperties/dcterms:created');
+                                                    var timeCreated = pointer.get(jsonData, '/cp:coreProperties/dcterms:created/_');
                                                     return callback(timeCreated) 
                                                 }catch(e){
                                                     
