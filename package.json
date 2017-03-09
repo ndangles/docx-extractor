@@ -1,6 +1,6 @@
 {
   "name": "docx-extractor",
-  "version": "1.0.52",
+  "version": "1.0.53",
   "description": "Extracts comments from docx files",
   "main": "index.js",
   "scripts": {
