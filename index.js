@@ -11,8 +11,8 @@ var parser = new xml2js.Parser()
 
 
 
-exports.templateUsed = function(filepath, callback){
-    fse.emptyDir(__dirname+'/tmp/', function(err){
+exports.templateUsed = function(filepath){
+
     if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
                 var newFile = filename+'.zip';
@@ -36,7 +36,7 @@ exports.templateUsed = function(filepath, callback){
 
                                                 try{
                                                     var templateUsed = pointer.get(jsonData, '/Properties/Template');
-                                                    return callback(templateUsed) 
+                                                    return templateUsed 
                                                 }catch(e){
                                                     
                                                     return console.log("Error occured trying to get the template used. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
@@ -56,8 +56,6 @@ exports.templateUsed = function(filepath, callback){
           } else {
           return console.log("Can't get the template used. The file you are passing into the function is not a 'docx' file");
       }
-
-  });
 }
 
 
@@ -114,8 +112,8 @@ exports.numberPages = function(filepath, callback){
 
 
 
-exports.lastModified = function(filepath, callback){
-    fse.emptyDir(__dirname+'/lm/', function(err){
+exports.lastModified = function(filepath){
+
     if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
                 var newFile = filename+'.zip';
@@ -139,7 +137,7 @@ exports.lastModified = function(filepath, callback){
 
                                                 try{
                                                     var lastModified = pointer.get(jsonData, '/cp:coreProperties/dcterms:modified/0/_');
-                                                    return callback(lastModified) 
+                                                    return lastModified;
                                                 }catch(e){
                                                     
                                                     return console.log("Error occured trying to get last time modified. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
@@ -159,11 +157,9 @@ exports.lastModified = function(filepath, callback){
           } else {
           return console.log("Can't get last time modified. The file you are passing into the function is not a 'docx' file");
       }
-
-  });
 }
 
-exports.timeCreated = function(filepath, callback){
+exports.timeCreated = function(filepath){
     fse.emptyDir(__dirname+'/tc/', function(err){
     if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
@@ -188,7 +184,7 @@ exports.timeCreated = function(filepath, callback){
 
                                                 try{
                                                     var timeCreated = pointer.get(jsonData, '/cp:coreProperties/dcterms:created/0/_');
-                                                    return callback(timeCreated) 
+                                                    return timeCreated;
                                                 }catch(e){
                                                     
                                                     return console.log("Error occured trying to get time created. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
@@ -209,7 +205,7 @@ exports.timeCreated = function(filepath, callback){
           return console.log("Can't get time created. The file you are passing into the function is not a 'docx' file");
       }
 
-  });
+  }
 }
 
 
