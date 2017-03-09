@@ -90,7 +90,7 @@ exports.numberPages = function(filepath, callback){
 
                                                 try{
                                                     var numberPages = pointer.get(jsonData, '/Properties/Pages');
-                                                    fse.emptyDir(__dirname+'np',function(err){
+                                                    fse.emptyDir(__dirname+'/np/',function(err){
                                                         return callback(numberPages);
                                                     });
                                                     
@@ -243,7 +243,7 @@ exports.getRevisionNumber = function(filepath, callback){
 
                                                 try{
                                                     var revisionNum = pointer.get(jsonData, '/cp:coreProperties/cp:revision');
-                                                    fse.emptyDir(__dirname+'rn', function(err){
+                                                    fse.emptyDir(__dirname+'/rn/', function(err){
                                                         return callback(revisionNum);
                                                     });
                                                     
@@ -297,7 +297,7 @@ exports.lastModifiedBy = function(filepath, callback){
 
                                                 try{
                                                     var author = pointer.get(jsonData, '/cp:coreProperties/cp:lastModifiedBy');
-                                                    fse.emptyDir(__dirname+'lmb',function(err){
+                                                    fse.emptyDir(__dirname+'/lmb/',function(err){
                                                         return callback(author);
                                                     });
                                                     
@@ -349,7 +349,7 @@ exports.getAuthor = function(filepath, callback){
 
                                                 try{
                                                     var author = pointer.get(jsonData, '/cp:coreProperties/dc:creator');
-                                                    fse.emptyDir(__dirname+'ga',function(err){
+                                                    fse.emptyDir(__dirname+'/ga/',function(err){
                                                        return callback(author); 
                                                    });
                                                     
@@ -412,7 +412,7 @@ exports.extractComments = function(filepath, callback) {
                                                     } 
                                                 }catch(e){
                                                     
-                                                    fse.emptyDir(__dirname+'ec',function(err){
+                                                    fse.emptyDir(__dirname+'/ec/',function(err){
                                                         return callback(comments);
                                                         
                                                     });
@@ -472,7 +472,7 @@ exports.extractComments = function(filepath, callback) {
 //                                                     } 
 //                                                 }catch(e){
 
-//                                                     fse.emptyDir(__dirname+'ghl',function(err){
+//                                                     fse.emptyDir(__dirname+'/ghl/',function(err){
 //                                                        return callback(hyperlinks);
 //                                                         
 //                                                    });
