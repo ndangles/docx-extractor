@@ -404,7 +404,7 @@ exports.extractComments = function(filepath, callback) {
                                                 
 
                                                 try{
-                                                    for(i=0; i<2000; i++){
+                                                    for(var i=0; i<2000; i++){
                                                         var test = pointer.get(jsonData, '/w:comments/w:comment/'+i+'/w:p/0/w:r/1/w:t');
                                                         var newComment = test[0].replace(/\W/g, ' ');
                                                         comments[i] = newComment;
@@ -464,27 +464,28 @@ exports.getHyperlinks = function(filepath, callback) {
                                                 
 
                                                 
+                                                for(var i=0; i<100; i++){
 
-                                                try{
+                                                    try{
 
-                                                    for(i=0; i<100; i++){
-                                                    var test = pointer.get(jsonData, '/w:document/w:body/0/w:p/'+i+'/w:hyperlink/0/w:r/0/w:t/0');
-                                                    
-                                                        if(test != null || test != undefined){
-                                                           hyperlinks.push(test);
-                                                        }
-                                                  }      
-                                                     
-                                                }catch(e){
+                                                        var test = pointer.get(jsonData, '/w:document/w:body/0/w:p/'+i+'/w:hyperlink/0/w:r/0/w:t/0');
+                                                        
+                                                            if(test != null || test != undefined){
+                                                               hyperlinks.push(test);
+                                                            }
+                                                      }     
+                                                         
+                                                    }catch(e){
 
-                                                   
-                                                    
-                                                 } finally{
+                                                       
+                                                        
+                                                     }
+                                                }
                                                     fse.emptyDir(__dirname+'/ghl/',function(err){
                                                        return callback(hyperlinks);
                                                         
                                                    });
-                                                 }
+                                                 
                                                 
                                             });
                                         });
