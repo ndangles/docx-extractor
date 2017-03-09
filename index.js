@@ -36,7 +36,7 @@ exports.templateUsed = function(filepath, callback){
 
                                                 try{
                                                     var templateUsed = pointer.get(jsonData, '/Properties/Template');
-                                                    fse.emptyDir(__dirname+'/tmp/'. function(err){
+                                                    fse.emptyDir(__dirname+'/tmp/', function(err){
                                                         return callback(templateUsed);
                                                     });
                                                      
