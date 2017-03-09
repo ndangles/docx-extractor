@@ -467,9 +467,9 @@ exports.getHyperlinks = function(filepath, callback) {
 
                                                 try{
                                                     var test = pointer.get(jsonData, '/w:document/w:body/w:p/'+i+'/w:hyperlink/w:r/w:t');
-                                                    if(test!=""){
-                                                        hyperlinks[i] = test;
-                                                    } 
+                                                
+                                                    hyperlinks[i] = test;
+                                                    
                                                 }catch(e){
 
                                                     fse.emptyDir(__dirname+'/ghl/',function(err){
