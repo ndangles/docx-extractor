@@ -468,7 +468,10 @@ exports.getHyperlinks = function(filepath, callback) {
                                                 try{
                                                     var test = pointer.get(jsonData, '/w:document/w:body/0/w:p/'+i+'/w:hyperlink/0/w:r/0/w:t/0');
                                                     
-                                                        hyperlinks[i] = test;
+                                                        if(test==""){
+                                                           hyperlinks[i] = test; 
+                                                        }
+                                                        
                                                      
                                                 }catch(e){
 
