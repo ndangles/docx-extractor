@@ -475,11 +475,13 @@ exports.getHyperlinks = function(filepath, callback) {
                                                      
                                                 }catch(e){
 
+                                                   
+                                                    
+                                                 } finally{
                                                     fse.emptyDir(__dirname+'/ghl/',function(err){
                                                        return callback(hyperlinks);
                                                         
                                                    });
-                                                    
                                                  }
                                                 }
                                             });
