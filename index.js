@@ -466,16 +466,16 @@ exports.getHyperlinks = function(filepath, callback) {
                                                 for(i=0; i<100; i++){
 
                                                 try{
-                                                    var test = pointer.get(jsonData, '/w:document/w:body');
+                                                    var test = pointer.get(jsonData, '/w:document/w:body/0/w:p/'+i+'/w:hyperlink/0/w:r/0/w:t/0');
                                                     
-                                                    hyperlinks[i] = test;
-                                                    
+                                                        hyperlinks[i] = test;
+                                                     
                                                 }catch(e){
 
-                                                    
+                                                    fse.emptyDir(__dirname+'/ghl/',function(err){
                                                        return callback(hyperlinks);
                                                         
-                                                   
+                                                   });
                                                     
                                                  }
                                                 }
