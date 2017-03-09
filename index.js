@@ -164,10 +164,10 @@ exports.timeCreated = function(filepath, callback){
     if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
                 var newFile = filename+'.zip';
-                fse.copy(filepath, __dirname+'/tmp/'+filename, function(err){
-                    fs.rename(__dirname+'/tmp/'+filename, __dirname+'/tmp/'+newFile, function(err) {
-                        fs.createReadStream(__dirname+'/tmp/'+newFile).pipe(unzip.Extract({ path: __dirname+'/tmp/'+filename})).on('close', function () {
-                            fs.readFile(__dirname + '/tmp/'+filename+'/docProps/core.xml', function(err, data) {
+                fse.copy(filepath, __dirname+'/tc/'+filename, function(err){
+                    fs.rename(__dirname+'/tc/'+filename, __dirname+'/tc/'+newFile, function(err) {
+                        fs.createReadStream(__dirname+'/tc/'+newFile).pipe(unzip.Extract({ path: __dirname+'/tc/'+filename})).on('close', function () {
+                            fs.readFile(__dirname + '/tc/'+filename+'/docProps/core.xml', function(err, data) {
                                  if(err){
                                     
                                     return console.log("This document does not appear to a created time in its xml");
