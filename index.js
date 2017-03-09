@@ -12,7 +12,7 @@ var parser = new xml2js.Parser()
 
 
 exports.templateUsed = function(filepath, callback){
-
+    fse.emptyDir(__dirname+'/tmp/', function(err){
     if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
                 var newFile = filename+'.zip';
@@ -56,6 +56,8 @@ exports.templateUsed = function(filepath, callback){
           } else {
           return console.log("Can't get the template used. The file you are passing into the function is not a 'docx' file");
       }
+
+  });
 }
 
 
@@ -113,7 +115,7 @@ exports.numberPages = function(filepath, callback){
 
 
 exports.lastModified = function(filepath, callback){
-
+    fse.emptyDir(__dirname+'/lm/', function(err){
     if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
                 var newFile = filename+'.zip';
@@ -157,10 +159,12 @@ exports.lastModified = function(filepath, callback){
           } else {
           return console.log("Can't get last time modified. The file you are passing into the function is not a 'docx' file");
       }
+
+  });
 }
 
 exports.timeCreated = function(filepath, callback){
-
+    fse.emptyDir(__dirname+'/tc/', function(err){
     if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
                 var newFile = filename+'.zip';
@@ -204,6 +208,8 @@ exports.timeCreated = function(filepath, callback){
           } else {
           return console.log("Can't get time created. The file you are passing into the function is not a 'docx' file");
       }
+
+  });
 }
 
 
