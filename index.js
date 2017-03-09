@@ -176,7 +176,7 @@ exports.timeCreated = function(filepath, callback){
                                     parser.parseString(data, function (err, result) {
 
                                         parsedData = JSON.stringify(result);
-                                        var file = __dirname+'/tmp/temp.json';
+                                        var file = __dirname+'/tc/temp.json';
                                         jsonfile.writeFile(file, parsedData, function(err){
                                             jsonfile.readFile(file, function(err, obj) {
                                                 var jsonData = JSON.parse(obj);
@@ -198,7 +198,7 @@ exports.timeCreated = function(filepath, callback){
                             });
                         });
                     });
-                    fse.remove(__dirname+'/tmp/');
+                    fse.remove(__dirname+'/tc/');
                 });
                 
           } else {
