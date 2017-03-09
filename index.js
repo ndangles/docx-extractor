@@ -176,14 +176,14 @@ exports.timeCreated = function(filepath, callback){
                                     parser.parseString(data, function (err, result) {
 
                                         parsedData = JSON.stringify(result);
-                                        var file = 'temp.json';
+                                        var file = __dirname+'/tmp/temp.json';
                                         jsonfile.writeFile(file, parsedData, function(err){
                                             jsonfile.readFile(file, function(err, obj) {
                                                 var jsonData = JSON.parse(obj);
                                                 
 
                                                 try{
-                                                    var timeCreated = pointer.get(jsonData, '/cp:coreProperties/dcterms:created/#text');
+                                                    var timeCreated = pointer.get(jsonData, '/cp:coreProperties/dcterms:created');
                                                     return callback(timeCreated) 
                                                 }catch(e){
                                                     
