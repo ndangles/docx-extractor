@@ -34,8 +34,6 @@ exports.templateUsed = function(filepath, callback){
                                                 var jsonData = JSON.parse(obj);
                                                 
 
-                                                for(i=0; i<2000; i++){
-
                                                 try{
                                                     var templateUsed = pointer.get(jsonData, '/Properties/Template');
                                                     return callback(templateUsed) 
@@ -43,7 +41,7 @@ exports.templateUsed = function(filepath, callback){
                                                     
                                                     return console.log("Error occured trying to get the template used. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
                                                  }
-                                                }
+                                                
                                             });
                                         });
 
@@ -86,7 +84,7 @@ exports.numberPages = function(filepath, callback){
                                                 var jsonData = JSON.parse(obj);
                                                 
 
-                                                for(i=0; i<2000; i++){
+                                                
 
                                                 try{
                                                     var numberPages = pointer.get(jsonData, '/Properties/Pages');
@@ -95,7 +93,7 @@ exports.numberPages = function(filepath, callback){
                                                     
                                                     return console.log("Error occured trying to get last time modified. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
                                                  }
-                                                }
+                                                
                                             });
                                         });
 
@@ -135,9 +133,7 @@ exports.lastModified = function(filepath, callback){
                                         jsonfile.writeFile(file, parsedData, function(err){
                                             jsonfile.readFile(file, function(err, obj) {
                                                 var jsonData = JSON.parse(obj);
-                                                
-
-                                                for(i=0; i<2000; i++){
+                                          
 
                                                 try{
                                                     var lastModified = pointer.get(jsonData, '/cp:coreProperties/dcterms:modified/#text');
@@ -146,7 +142,7 @@ exports.lastModified = function(filepath, callback){
                                                     
                                                     return console.log("Error occured trying to get last time modified. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
                                                  }
-                                                }
+                                                
                                             });
                                         });
 
@@ -186,8 +182,6 @@ exports.timeCreated = function(filepath, callback){
                                                 var jsonData = JSON.parse(obj);
                                                 
 
-                                                for(i=0; i<2000; i++){
-
                                                 try{
                                                     var timeCreated = pointer.get(jsonData, '/cp:coreProperties/dcterms:created/#text');
                                                     return callback(timeCreated) 
@@ -195,7 +189,7 @@ exports.timeCreated = function(filepath, callback){
                                                     
                                                     return console.log("Error occured trying to get time created. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
                                                  }
-                                                }
+                                                
                                             });
                                         });
 
@@ -236,9 +230,7 @@ exports.getRevisionNumber = function(filepath, callback){
                                         jsonfile.writeFile(file, parsedData, function(err){
                                             jsonfile.readFile(file, function(err, obj) {
                                                 var jsonData = JSON.parse(obj);
-                                                
-
-                                                for(i=0; i<2000; i++){
+                                          
 
                                                 try{
                                                     var revisionNum = pointer.get(jsonData, '/cp:coreProperties/cp:revision');
@@ -247,7 +239,7 @@ exports.getRevisionNumber = function(filepath, callback){
                                                     
                                                     return console.log("Error occured trying to get revisionNum. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
                                                  }
-                                                }
+                                                
                                             });
                                         });
 
@@ -290,9 +282,7 @@ exports.lastModifiedBy = function(filepath, callback){
                                         jsonfile.writeFile(file, parsedData, function(err){
                                             jsonfile.readFile(file, function(err, obj) {
                                                 var jsonData = JSON.parse(obj);
-                                                
-
-                                                for(i=0; i<2000; i++){
+                                        
 
                                                 try{
                                                     var author = pointer.get(jsonData, '/cp:coreProperties/cp:lastModifiedBy');
@@ -301,7 +291,7 @@ exports.lastModifiedBy = function(filepath, callback){
                                                     
                                                     return console.log("Error occured trying to get author name. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
                                                  }
-                                                }
+                                                
                                             });
                                         });
 
@@ -343,7 +333,6 @@ exports.getAuthor = function(filepath, callback){
                                                 var jsonData = JSON.parse(obj);
                                                 
 
-                                                for(i=0; i<2000; i++){
 
                                                 try{
                                                     var author = pointer.get(jsonData, '/cp:coreProperties/dc:creator');
@@ -352,7 +341,7 @@ exports.getAuthor = function(filepath, callback){
                                                     
                                                     return console.log("Error occured trying to get author name. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
                                                  }
-                                                }
+                                                
                                             });
                                         });
 
