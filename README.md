@@ -43,56 +43,56 @@ dxe.someMethod('myfile.docx', function(data){
 
  - `extractComments(file, callback)`
 
- 		Extracts the comments embedded into the xml of 'docx' files. It returns all of the comments as an array.
+ 	-> Extracts the comments embedded into the xml of 'docx' files. It returns all of the comments as an array.
 
 
  
  - `getHyperlinks(file, callback)`
 
- 		Returns all hyperlinks in the docx file as an array
+ 	-> Returns all hyperlinks in the docx file as an array
 
 
 
  - `getRevisionNumber(file, callback)`
 
- 		Returns the number of times the document was modified and saved.
+ 	-> Returns the number of times the document was modified and saved.
 
 
 
  - `numberPages(file, callback)`
 
- 		Returns number of pages in the docx file
+ 	-> Returns number of pages in the docx file
 
 
 
  - `getAuthor(file, callback)`
 
- 		Returns the original author of the document. This will be the name of the user account on the machine it was created from.
+ 	-> Returns the original author of the document. This will be the name of the user account on the machine it was created from.
 
 
 
  - `lastModifiedBy(file, callback)`
 
- 		Returns the last person that modified the document. Again, this returns the name of the computer's user account that was in use at the time.
+ 	-> Returns the last person that modified the document. Again, this returns the name of the computer's user account that was in use at the time.
 
 
 
  - `timeCreated(file, callback)`
 
- 		Returns the time the docx file was originally created. Example: 2017-03-08T17:40:00Z
+ 	-> Returns the time the docx file was originally created. Example: 2017-03-08T17:40:00Z
 
 
 
 - `lastModified(file, callback)`
 	
-		Returns the time that the document was last modified. Example: 2017-03-09T14:23:00Z
+	-> Returns the time that the document was last modified. Example: 2017-03-09T14:23:00Z
 
 
 
 - `templateUsed(file, callback)`
 
-		Returns the template that was used when creating the document. Example: "Normal.dotm" is the template name of when someone starts a docx file with the blank template.
-		
+	-> Returns the template that was used when creating the document. Example: "Normal.dotm" is the template name of when someone starts a docx file with the blank template.
+
 
 
  Future
