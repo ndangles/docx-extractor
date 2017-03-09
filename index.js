@@ -117,10 +117,10 @@ exports.lastModified = function(filepath, callback){
     if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
                 var newFile = filename+'.zip';
-                fse.copy(filepath, __dirname+'/tmp/'+filename, function(err){
-                    fs.rename(__dirname+'/tmp/'+filename, __dirname+'/tmp/'+newFile, function(err) {
-                        fs.createReadStream(__dirname+'/tmp/'+newFile).pipe(unzip.Extract({ path: __dirname+'/tmp/'+filename})).on('close', function () {
-                            fs.readFile(__dirname + '/tmp/'+filename+'/docProps/core.xml', function(err, data) {
+                fse.copy(filepath, __dirname+'/lm/'+filename, function(err){
+                    fs.rename(__dirname+'/lm/'+filename, __dirname+'/lm/'+newFile, function(err) {
+                        fs.createReadStream(__dirname+'/lm/'+newFile).pipe(unzip.Extract({ path: __dirname+'/lm/'+filename})).on('close', function () {
+                            fs.readFile(__dirname + '/lm/'+filename+'/docProps/core.xml', function(err, data) {
                                  if(err){
                                     
                                     return console.log("This document does not appear to a last modified time in its xml");
@@ -129,7 +129,7 @@ exports.lastModified = function(filepath, callback){
                                     parser.parseString(data, function (err, result) {
 
                                         parsedData = JSON.stringify(result);
-                                        var file = __dirname+'/tmp/temp.json';
+                                        var file = __dirname+'/lm/temp.json';
                                         jsonfile.writeFile(file, parsedData, function(err){
                                             jsonfile.readFile(file, function(err, obj) {
                                                 var jsonData = JSON.parse(obj);
@@ -151,7 +151,7 @@ exports.lastModified = function(filepath, callback){
                             });
                         });
                     });
-                    fse.remove(__dirname+'/tmp/');
+                    fse.remove(__dirname+'/lm/');
                 });
                 
           } else {
