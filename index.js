@@ -389,7 +389,10 @@ exports.extractComments = function(filepath, callback) {
                             fs.readFile(__dirname + '/ec/'+filename+'/word/comments.xml', function(err, data) {
                                  if(err){
                                     
-                                    return console.log("This document does not appear to have any comments");
+                                    fse.emptyDir(__dirname+'/ec/',function(err){
+                                        return callback(comments);
+                                                        
+                                    });
                                 
                                 } else{
                                     parser.parseString(data, function (err, result) {
