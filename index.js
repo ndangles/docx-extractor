@@ -463,15 +463,17 @@ exports.getHyperlinks = function(filepath, callback) {
                                                 var jsonData = JSON.parse(obj);
                                                 
 
-                                                for(i=0; i<100; i++){
+                                                
 
                                                 try{
+
+                                                    for(i=0; i<100; i++){
                                                     var test = pointer.get(jsonData, '/w:document/w:body/0/w:p/'+i+'/w:hyperlink/0/w:r/0/w:t/0');
                                                     
                                                         if(test != null || test != undefined){
                                                            hyperlinks.push(test);
                                                         }
-                                                        
+                                                  }      
                                                      
                                                 }catch(e){
 
@@ -483,7 +485,7 @@ exports.getHyperlinks = function(filepath, callback) {
                                                         
                                                    });
                                                  }
-                                                }
+                                                
                                             });
                                         });
 
