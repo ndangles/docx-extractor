@@ -12,7 +12,7 @@ var parser = new xml2js.Parser()
 
 
 exports.templateUsed = function(filepath, callback){
-
+    fse.remove(__dirname+'/tmp/');
     if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
                 var newFile = filename+'.zip';
@@ -113,7 +113,7 @@ exports.numberPages = function(filepath, callback){
 
 
 exports.lastModified = function(filepath, callback){
-
+    fse.remove(__dirname+'/lm/');
     if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
                 var newFile = filename+'.zip';
@@ -160,7 +160,7 @@ exports.lastModified = function(filepath, callback){
 }
 
 exports.timeCreated = function(filepath, callback){
-
+    fse.remove(__dirname+'/tc/');
     if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
                 var newFile = filename+'.zip';
