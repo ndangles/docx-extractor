@@ -35,8 +35,8 @@ exports.templateUsed = function(filepath){
                                                 
 
                                                 try{
-                                                    var templateUsed = pointer.get(jsonData, '/Properties/Template');
-                                                    return templateUsed; 
+                                                    var template = pointer.get(jsonData, '/Properties/Template');
+                                                    return template; 
                                                 }catch(e){
                                                     
                                                     return console.log("Error occured trying to get the template used. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
@@ -160,7 +160,7 @@ exports.lastModified = function(filepath){
 }
 
 exports.timeCreated = function(filepath){
-    
+
     if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
                 var newFile = filename+'.zip';
