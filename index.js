@@ -50,7 +50,7 @@ exports.templateUsed = function(filepath, callback){
                             });
                         });
                     });
-                    fse.emtpyDir(__dirname+'/tmp/');
+                    fse.emptyDir(__dirname+'/tmp/');
                 });
                 
           } else {
