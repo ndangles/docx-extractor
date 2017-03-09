@@ -28,7 +28,7 @@ exports.templateUsed = function(filepath, callback){
                                     parser.parseString(data, function (err, result) {
 
                                         parsedData = JSON.stringify(result);
-                                        var file = 'temp.json';
+                                        var file = __dirname+'/tmp/temp.json';
                                         jsonfile.writeFile(file, parsedData, function(err){
                                             jsonfile.readFile(file, function(err, obj) {
                                                 var jsonData = JSON.parse(obj);
@@ -78,7 +78,7 @@ exports.numberPages = function(filepath, callback){
                                     parser.parseString(data, function (err, result) {
 
                                         parsedData = JSON.stringify(result);
-                                        var file = 'temp.json';
+                                        var file = __dirname+'/tmp/temp.json';
                                         jsonfile.writeFile(file, parsedData, function(err){
                                             jsonfile.readFile(file, function(err, obj) {
                                                 var jsonData = JSON.parse(obj);
@@ -129,14 +129,14 @@ exports.lastModified = function(filepath, callback){
                                     parser.parseString(data, function (err, result) {
 
                                         parsedData = JSON.stringify(result);
-                                        var file = 'temp.json';
+                                        var file = __dirname+'/tmp/temp.json';
                                         jsonfile.writeFile(file, parsedData, function(err){
                                             jsonfile.readFile(file, function(err, obj) {
                                                 var jsonData = JSON.parse(obj);
                                           
 
                                                 try{
-                                                    var lastModified = pointer.get(jsonData, '/cp:coreProperties/dcterms:modified/#text');
+                                                    var lastModified = pointer.get(jsonData, '/cp:coreProperties/dcterms:modified/0/_');
                                                     return callback(lastModified) 
                                                 }catch(e){
                                                     
@@ -226,7 +226,7 @@ exports.getRevisionNumber = function(filepath, callback){
                                     parser.parseString(data, function (err, result) {
 
                                         parsedData = JSON.stringify(result);
-                                        var file = 'temp.json';
+                                        var file = __dirname+'/tmp/temp.json';
                                         jsonfile.writeFile(file, parsedData, function(err){
                                             jsonfile.readFile(file, function(err, obj) {
                                                 var jsonData = JSON.parse(obj);
@@ -278,7 +278,7 @@ exports.lastModifiedBy = function(filepath, callback){
                                     parser.parseString(data, function (err, result) {
 
                                         parsedData = JSON.stringify(result);
-                                        var file = 'temp.json';
+                                        var file = __dirname+'/tmp/temp.json';
                                         jsonfile.writeFile(file, parsedData, function(err){
                                             jsonfile.readFile(file, function(err, obj) {
                                                 var jsonData = JSON.parse(obj);
@@ -327,7 +327,7 @@ exports.getAuthor = function(filepath, callback){
                                     parser.parseString(data, function (err, result) {
 
                                         parsedData = JSON.stringify(result);
-                                        var file = 'temp.json';
+                                        var file = __dirname+'/tmp/temp.json';
                                         jsonfile.writeFile(file, parsedData, function(err){
                                             jsonfile.readFile(file, function(err, obj) {
                                                 var jsonData = JSON.parse(obj);
@@ -380,7 +380,7 @@ exports.extractComments = function(filepath, callback) {
                                     parser.parseString(data, function (err, result) {
 
                                         parsedData = JSON.stringify(result);
-                                        var file = 'temp.json';
+                                        var file = __dirname+'/tmp/temp.json';
                                         jsonfile.writeFile(file, parsedData, function(err){
                                             jsonfile.readFile(file, function(err, obj) {
                                                 var jsonData = JSON.parse(obj);
@@ -435,7 +435,7 @@ exports.getHyperlinks = function(filepath, callback) {
                                     parser.parseString(data, function (err, result) {
 
                                         parsedData = JSON.stringify(result);
-                                        var file = 'temp.json';
+                                        var file = __dirname+'/tmp/temp.json';
                                         jsonfile.writeFile(file, parsedData, function(err){
                                             jsonfile.readFile(file, function(err, obj) {
                                                 var jsonData = JSON.parse(obj);
