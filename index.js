@@ -92,7 +92,7 @@ exports.numberPages = function(filepath, callback){
                                                     var numberPages = pointer.get(jsonData, '/Properties/Pages');
                                                     fse.emptyDir(__dirname+'np',function(err){
                                                         return callback(numberPages);
-                                                    })
+                                                    });
                                                     
                                                 }catch(e){
                                                     
