@@ -36,8 +36,10 @@ exports.templateUsed = function(filepath, callback){
 
                                                 try{
                                                     var templateUsed = pointer.get(jsonData, '/Properties/Template');
-                                                    fse.emptyDir(__dirname+'/tmp/');
-                                                    return callback(templateUsed); 
+                                                    fse.emptyDir(__dirname+'/tmp/'. function(err){
+                                                        return callback(templateUsed);
+                                                    });
+                                                     
                                                 }catch(e){
                                                     
                                                     return console.log("Error occured trying to get the template used. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
@@ -51,7 +53,6 @@ exports.templateUsed = function(filepath, callback){
                             });
                         });
                     });
-                    fse.emptyDir(__dirname+'/tmp/');
                 });
                 
           } else {
@@ -138,8 +139,10 @@ exports.lastModified = function(filepath, callback){
 
                                                 try{
                                                     var lastModified = pointer.get(jsonData, '/cp:coreProperties/dcterms:modified/0/_');
-                                                    fse.emptyDir(__dirname+'/lm/');
-                                                    return callback(lastModified);
+                                                    fse.emptyDir(__dirname+'/lm/', function(err){
+                                                        return callback(lastModified);
+                                                    });
+                                                    
                                                 }catch(e){
                                                     
                                                     return console.log("Error occured trying to get last time modified. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
@@ -153,7 +156,6 @@ exports.lastModified = function(filepath, callback){
                             });
                         });
                     });
-                    fse.emptyDir(__dirname+'/lm/');
                 });
                 
           } else {
@@ -186,8 +188,10 @@ exports.timeCreated = function(filepath, callback){
 
                                                 try{
                                                     var timeCreated = pointer.get(jsonData, '/cp:coreProperties/dcterms:created/0/_');
-                                                    fse.emptyDir(__dirname+'/tc/');
-                                                    return callback(timeCreated); 
+                                                    fse.emptyDir(__dirname+'/tc/',function(err){
+                                                        return callback(timeCreated); 
+                                                    });
+                                                    
                                                 }catch(e){
                                                     
                                                     return console.log("Error occured trying to get time created. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
@@ -201,7 +205,6 @@ exports.timeCreated = function(filepath, callback){
                             });
                         });
                     });
-                    fse.emptyDir(__dirname+'/tc/');
                 });
                 
           } else {
