@@ -8,6 +8,370 @@ var pointer = require('json-pointer');
 var parser = new xml2js.Parser()
 
 
+
+
+
+exports.templateUsed = function(filepath, callback){
+
+    if(filepath.indexOf(".docx")>-1){
+                var filename = path.basename(filepath);
+                var newFile = filename+'.zip';
+                fse.copy(filepath, __dirname+'/tmp/'+filename, function(err){
+                    fs.rename(__dirname+'/tmp/'+filename, __dirname+'/tmp/'+newFile, function(err) {
+                        fs.createReadStream(__dirname+'/tmp/'+newFile).pipe(unzip.Extract({ path: __dirname+'/tmp/'+filename})).on('close', function () {
+                            fs.readFile(__dirname + '/tmp/'+filename+'/docProps/app.xml', function(err, data) {
+                                 if(err){
+                                    
+                                    return console.log("This document does not appear to specify the template used in its xml");
+                                
+                                } else{
+                                    parser.parseString(data, function (err, result) {
+
+                                        parsedData = JSON.stringify(result);
+                                        var file = 'temp.json';
+                                        jsonfile.writeFile(file, parsedData, function(err){
+                                            jsonfile.readFile(file, function(err, obj) {
+                                                var jsonData = JSON.parse(obj);
+                                                
+
+                                                for(i=0; i<2000; i++){
+
+                                                try{
+                                                    var templateUsed = pointer.get(jsonData, '/Properties/Template');
+                                                    return callback(templateUsed) 
+                                                }catch(e){
+                                                    
+                                                    return console.log("Error occured trying to get the template used. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
+                                                 }
+                                                }
+                                            });
+                                        });
+
+                                    });
+                                }
+                            });
+                        });
+                    });
+                    fse.remove(__dirname+'/tmp/');
+                });
+                
+          } else {
+          return console.log("Can't get the template used. The file you are passing into the function is not a 'docx' file");
+      }
+}
+
+
+
+
+exports.numberPages = function(filepath, callback){
+
+    if(filepath.indexOf(".docx")>-1){
+                var filename = path.basename(filepath);
+                var newFile = filename+'.zip';
+                fse.copy(filepath, __dirname+'/tmp/'+filename, function(err){
+                    fs.rename(__dirname+'/tmp/'+filename, __dirname+'/tmp/'+newFile, function(err) {
+                        fs.createReadStream(__dirname+'/tmp/'+newFile).pipe(unzip.Extract({ path: __dirname+'/tmp/'+filename})).on('close', function () {
+                            fs.readFile(__dirname + '/tmp/'+filename+'/docProps/app.xml', function(err, data) {
+                                 if(err){
+                                    
+                                    return console.log("This document does not appear to have a last modified time in its xml");
+                                
+                                } else{
+                                    parser.parseString(data, function (err, result) {
+
+                                        parsedData = JSON.stringify(result);
+                                        var file = 'temp.json';
+                                        jsonfile.writeFile(file, parsedData, function(err){
+                                            jsonfile.readFile(file, function(err, obj) {
+                                                var jsonData = JSON.parse(obj);
+                                                
+
+                                                for(i=0; i<2000; i++){
+
+                                                try{
+                                                    var numberPages = pointer.get(jsonData, '/Properties/Pages');
+                                                    return callback(numberPages) 
+                                                }catch(e){
+                                                    
+                                                    return console.log("Error occured trying to get last time modified. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
+                                                 }
+                                                }
+                                            });
+                                        });
+
+                                    });
+                                }
+                            });
+                        });
+                    });
+                    fse.remove(__dirname+'/tmp/');
+                });
+                
+          } else {
+          return console.log("Can't get last time modified. The file you are passing into the function is not a 'docx' file");
+      }
+}
+
+
+
+exports.lastModified = function(filepath, callback){
+
+    if(filepath.indexOf(".docx")>-1){
+                var filename = path.basename(filepath);
+                var newFile = filename+'.zip';
+                fse.copy(filepath, __dirname+'/tmp/'+filename, function(err){
+                    fs.rename(__dirname+'/tmp/'+filename, __dirname+'/tmp/'+newFile, function(err) {
+                        fs.createReadStream(__dirname+'/tmp/'+newFile).pipe(unzip.Extract({ path: __dirname+'/tmp/'+filename})).on('close', function () {
+                            fs.readFile(__dirname + '/tmp/'+filename+'/docProps/core.xml', function(err, data) {
+                                 if(err){
+                                    
+                                    return console.log("This document does not appear to a last modified time in its xml");
+                                
+                                } else{
+                                    parser.parseString(data, function (err, result) {
+
+                                        parsedData = JSON.stringify(result);
+                                        var file = 'temp.json';
+                                        jsonfile.writeFile(file, parsedData, function(err){
+                                            jsonfile.readFile(file, function(err, obj) {
+                                                var jsonData = JSON.parse(obj);
+                                                
+
+                                                for(i=0; i<2000; i++){
+
+                                                try{
+                                                    var lastModified = pointer.get(jsonData, '/cp:coreProperties/dcterms:modified/#text');
+                                                    return callback(lastModified) 
+                                                }catch(e){
+                                                    
+                                                    return console.log("Error occured trying to get last time modified. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
+                                                 }
+                                                }
+                                            });
+                                        });
+
+                                    });
+                                }
+                            });
+                        });
+                    });
+                    fse.remove(__dirname+'/tmp/');
+                });
+                
+          } else {
+          return console.log("Can't get last time modified. The file you are passing into the function is not a 'docx' file");
+      }
+}
+
+exports.timeCreated = function(filepath, callback){
+
+    if(filepath.indexOf(".docx")>-1){
+                var filename = path.basename(filepath);
+                var newFile = filename+'.zip';
+                fse.copy(filepath, __dirname+'/tmp/'+filename, function(err){
+                    fs.rename(__dirname+'/tmp/'+filename, __dirname+'/tmp/'+newFile, function(err) {
+                        fs.createReadStream(__dirname+'/tmp/'+newFile).pipe(unzip.Extract({ path: __dirname+'/tmp/'+filename})).on('close', function () {
+                            fs.readFile(__dirname + '/tmp/'+filename+'/docProps/core.xml', function(err, data) {
+                                 if(err){
+                                    
+                                    return console.log("This document does not appear to a created time in its xml");
+                                
+                                } else{
+                                    parser.parseString(data, function (err, result) {
+
+                                        parsedData = JSON.stringify(result);
+                                        var file = 'temp.json';
+                                        jsonfile.writeFile(file, parsedData, function(err){
+                                            jsonfile.readFile(file, function(err, obj) {
+                                                var jsonData = JSON.parse(obj);
+                                                
+
+                                                for(i=0; i<2000; i++){
+
+                                                try{
+                                                    var timeCreated = pointer.get(jsonData, '/cp:coreProperties/dcterms:created/#text');
+                                                    return callback(timeCreated) 
+                                                }catch(e){
+                                                    
+                                                    return console.log("Error occured trying to get time created. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
+                                                 }
+                                                }
+                                            });
+                                        });
+
+                                    });
+                                }
+                            });
+                        });
+                    });
+                    fse.remove(__dirname+'/tmp/');
+                });
+                
+          } else {
+          return console.log("Can't get time created. The file you are passing into the function is not a 'docx' file");
+      }
+}
+
+
+
+
+exports.getRevisionNumber = function(filepath, callback){
+
+    if(filepath.indexOf(".docx")>-1){
+                var filename = path.basename(filepath);
+                var newFile = filename+'.zip';
+                fse.copy(filepath, __dirname+'/tmp/'+filename, function(err){
+                    fs.rename(__dirname+'/tmp/'+filename, __dirname+'/tmp/'+newFile, function(err) {
+                        fs.createReadStream(__dirname+'/tmp/'+newFile).pipe(unzip.Extract({ path: __dirname+'/tmp/'+filename})).on('close', function () {
+                            fs.readFile(__dirname + '/tmp/'+filename+'/docProps/core.xml', function(err, data) {
+                                 if(err){
+                                    
+                                    return console.log("This document does not appear to a revision number");
+                                
+                                } else{
+                                    parser.parseString(data, function (err, result) {
+
+                                        parsedData = JSON.stringify(result);
+                                        var file = 'temp.json';
+                                        jsonfile.writeFile(file, parsedData, function(err){
+                                            jsonfile.readFile(file, function(err, obj) {
+                                                var jsonData = JSON.parse(obj);
+                                                
+
+                                                for(i=0; i<2000; i++){
+
+                                                try{
+                                                    var revisionNum = pointer.get(jsonData, '/cp:coreProperties/cp:revision');
+                                                    return callback(revisionNum) 
+                                                }catch(e){
+                                                    
+                                                    return console.log("Error occured trying to get revisionNum. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
+                                                 }
+                                                }
+                                            });
+                                        });
+
+                                    });
+                                }
+                            });
+                        });
+                    });
+                    fse.remove(__dirname+'/tmp/');
+                });
+                
+          } else {
+          return console.log("Can't get revision number. The file you are passing into the function is not a 'docx' file");
+      }
+}
+
+
+
+
+
+
+exports.lastModifiedBy = function(filepath, callback){
+
+    if(filepath.indexOf(".docx")>-1){
+                var filename = path.basename(filepath);
+                var newFile = filename+'.zip';
+                fse.copy(filepath, __dirname+'/tmp/'+filename, function(err){
+                    fs.rename(__dirname+'/tmp/'+filename, __dirname+'/tmp/'+newFile, function(err) {
+                        fs.createReadStream(__dirname+'/tmp/'+newFile).pipe(unzip.Extract({ path: __dirname+'/tmp/'+filename})).on('close', function () {
+                            fs.readFile(__dirname + '/tmp/'+filename+'/docProps/core.xml', function(err, data) {
+                                 if(err){
+                                    
+                                    return console.log("This document does not appear to a specified author");
+                                
+                                } else{
+                                    parser.parseString(data, function (err, result) {
+
+                                        parsedData = JSON.stringify(result);
+                                        var file = 'temp.json';
+                                        jsonfile.writeFile(file, parsedData, function(err){
+                                            jsonfile.readFile(file, function(err, obj) {
+                                                var jsonData = JSON.parse(obj);
+                                                
+
+                                                for(i=0; i<2000; i++){
+
+                                                try{
+                                                    var author = pointer.get(jsonData, '/cp:coreProperties/cp:lastModifiedBy');
+                                                    return callback(author) 
+                                                }catch(e){
+                                                    
+                                                    return console.log("Error occured trying to get author name. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
+                                                 }
+                                                }
+                                            });
+                                        });
+
+                                    });
+                                }
+                            });
+                        });
+                    });
+                    fse.remove(__dirname+'/tmp/');
+                });
+                
+          } else {
+          return console.log("Can't get author name. The file you are passing into the function is not a 'docx' file");
+      }
+}
+
+
+
+exports.getAuthor = function(filepath, callback){
+
+    if(filepath.indexOf(".docx")>-1){
+                var filename = path.basename(filepath);
+                var newFile = filename+'.zip';
+                fse.copy(filepath, __dirname+'/tmp/'+filename, function(err){
+                    fs.rename(__dirname+'/tmp/'+filename, __dirname+'/tmp/'+newFile, function(err) {
+                        fs.createReadStream(__dirname+'/tmp/'+newFile).pipe(unzip.Extract({ path: __dirname+'/tmp/'+filename})).on('close', function () {
+                            fs.readFile(__dirname + '/tmp/'+filename+'/docProps/core.xml', function(err, data) {
+                                 if(err){
+                                    
+                                    return console.log("This document does not appear to have a specified author");
+                                
+                                } else{
+                                    parser.parseString(data, function (err, result) {
+
+                                        parsedData = JSON.stringify(result);
+                                        var file = 'temp.json';
+                                        jsonfile.writeFile(file, parsedData, function(err){
+                                            jsonfile.readFile(file, function(err, obj) {
+                                                var jsonData = JSON.parse(obj);
+                                                
+
+                                                for(i=0; i<2000; i++){
+
+                                                try{
+                                                    var author = pointer.get(jsonData, '/cp:coreProperties/dc:creator');
+                                                    return callback(author) 
+                                                }catch(e){
+                                                    
+                                                    return console.log("Error occured trying to get author name. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
+                                                 }
+                                                }
+                                            });
+                                        });
+
+                                    });
+                                }
+                            });
+                        });
+                    });
+                    fse.remove(__dirname+'/tmp/');
+                });
+                
+          } else {
+          return console.log("Can't get author name. The file you are passing into the function is not a 'docx' file");
+      }
+}
+
+
+
+
 exports.extractComments = function(filepath, callback) {    
       
     var comments = [];
@@ -56,7 +420,63 @@ exports.extractComments = function(filepath, callback) {
                 });
                 
           } else {
-          return console.log("The file you are passing into the function is not a 'docx' file");
+          return console.log("Can't get comments. The file you are passing into the function is not a 'docx' file");
+      }
+
+}
+
+
+
+exports.getHyperlinks = function(filepath, callback) {    
+      
+    var hyperlinks = [];
+
+    if(filepath.indexOf(".docx")>-1){
+                var filename = path.basename(filepath);
+                var newFile = filename+'.zip';
+                fse.copy(filepath, __dirname+'/tmp/'+filename, function(err){
+                    fs.rename(__dirname+'/tmp/'+filename, __dirname+'/tmp/'+newFile, function(err) {
+                        fs.createReadStream(__dirname+'/tmp/'+newFile).pipe(unzip.Extract({ path: __dirname+'/tmp/'+filename})).on('close', function () {
+                            fs.readFile(__dirname + '/tmp/'+filename+'/word/document.xml', function(err, data) {
+                                 if(err){
+                                    
+                                    return console.log("This document does not appear to have any hyperlinks");
+                                
+                                } else{
+                                    parser.parseString(data, function (err, result) {
+
+                                        parsedData = JSON.stringify(result);
+                                        var file = 'temp.json';
+                                        jsonfile.writeFile(file, parsedData, function(err){
+                                            jsonfile.readFile(file, function(err, obj) {
+                                                var jsonData = JSON.parse(obj);
+                                                
+
+                                                for(i=0; i<100; i++){
+
+                                                try{
+                                                    var test = pointer.get(jsonData, '/w:document/w:body/w:p/'+i+'/w:hyperlink/w:r/w:t');
+                                                    if(test!=null){
+                                                        hyperlinks[i] = test;
+                                                    } 
+                                                }catch(e){
+                                                    
+                                                    return callback(hyperlinks);
+                                                 }
+                                                }
+                                            });
+                                        });
+
+                                    });
+                                }
+                            });
+                        });
+                    });
+                    fse.remove(__dirname+'/tmp/');
+                });
+                
+          } else {
+          return console.log("Can't get hyperlinks. The file you are passing into the function is not a 'docx' file");
       }
 
 }
