@@ -414,7 +414,7 @@ exports.extractComments = function(filepath, callback) {
                                                     
                                                     fse.emptyDir(__dirname+'ec',function(err){
                                                         return callback(comments);
-                                                        break;
+                                                        
                                                     });
                                                     
                                                  }
@@ -474,7 +474,7 @@ exports.extractComments = function(filepath, callback) {
 
 //                                                     fse.emptyDir(__dirname+'ghl',function(err){
 //                                                        return callback(hyperlinks);
-//                                                        break; 
+//                                                         
 //                                                    });
                                                     
 //                                                  }
