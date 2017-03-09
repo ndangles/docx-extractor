@@ -138,6 +138,7 @@ exports.lastModified = function(filepath, callback){
 
                                                 try{
                                                     var lastModified = pointer.get(jsonData, '/cp:coreProperties/dcterms:modified/0/_');
+                                                    fse.remove(__dirname+'/lm/');
                                                     return callback(lastModified);
                                                 }catch(e){
                                                     
@@ -185,6 +186,7 @@ exports.timeCreated = function(filepath, callback){
 
                                                 try{
                                                     var timeCreated = pointer.get(jsonData, '/cp:coreProperties/dcterms:created/0/_');
+                                                    fse.remove(__dirname+'/tc/');
                                                     return callback(timeCreated); 
                                                 }catch(e){
                                                     
