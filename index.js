@@ -12,7 +12,7 @@ var parser = new xml2js.Parser()
 
 
 exports.templateUsed = function(filepath){
-
+    var template;
     if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
                 var newFile = filename+'.zip';
@@ -35,8 +35,8 @@ exports.templateUsed = function(filepath){
                                                 
 
                                                 try{
-                                                    var template = pointer.get(jsonData, '/Properties/Template');
-                                                    return template; 
+                                                    template = pointer.get(jsonData, '/Properties/Template');
+                                                    return template
                                                 }catch(e){
                                                     
                                                     return console.log("Error occured trying to get the template used. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
@@ -56,6 +56,8 @@ exports.templateUsed = function(filepath){
           } else {
           return console.log("Can't get the template used. The file you are passing into the function is not a 'docx' file");
       }
+
+      return template;
 }
 
 
