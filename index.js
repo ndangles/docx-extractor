@@ -42,7 +42,7 @@ exports.templateUsed = function(filepath, callback){
                                                      
                                                 }catch(e){
                                                     
-                                                    return console.log("Error occured trying to get the template used. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
+                                                    return console.log("Error occured trying to get the template used. If you are seeing this error and cannot resolve the issue, you can open an issue on the Github page");
                                                  }
                                                 
                                             });
@@ -74,7 +74,7 @@ exports.numberPages = function(filepath, callback){
                             fs.readFile(__dirname + '/np/'+filename+'/docProps/app.xml', function(err, data) {
                                  if(err){
                                     
-                                    return console.log("This document does not appear to have a last modified time in its xml");
+                                    return console.log("This document does not appear to have the number of pages listed in its xml");
                                 
                                 } else{
                                     parser.parseString(data, function (err, result) {
@@ -96,7 +96,7 @@ exports.numberPages = function(filepath, callback){
                                                     
                                                 }catch(e){
                                                     
-                                                    return console.log("Error occured trying to get last time modified. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
+                                                    return console.log("Error occured trying to get number of pages. If you are seeing this error and cannot resolve the issue, you can open an issue on the Github page");
                                                  }
                                                 
                                             });
@@ -111,7 +111,7 @@ exports.numberPages = function(filepath, callback){
                 });
                 
           } else {
-          return console.log("Can't get last time modified. The file you are passing into the function is not a 'docx' file");
+          return console.log("Can't get number of pages. The file you are passing into the function is not a 'docx' file");
       }
 }
 
@@ -148,7 +148,7 @@ exports.lastModified = function(filepath, callback){
                                                     
                                                 }catch(e){
                                                     
-                                                    return console.log("Error occured trying to get last time modified. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
+                                                    return console.log("Error occured trying to get last time modified. If you are seeing this error and cannot resolve the issue, you can open an issue on the Github page");
                                                  }
                                                 
                                             });
@@ -177,7 +177,7 @@ exports.timeCreated = function(filepath, callback){
                             fs.readFile(__dirname + '/tc/'+filename+'/docProps/core.xml', function(err, data) {
                                  if(err){
                                     
-                                    return console.log("This document does not appear to a created time in its xml");
+                                    return console.log("This document does not appear to have a created time in its xml");
                                 
                                 } else{
                                     parser.parseString(data, function (err, result) {
@@ -197,7 +197,7 @@ exports.timeCreated = function(filepath, callback){
                                                     
                                                 }catch(e){
                                                     
-                                                    return console.log("Error occured trying to get time created. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
+                                                    return console.log("Error occured trying to get time created. If you are seeing this error and cannot resolve the issue, you can open an issue on the Github page");
                                                  }
                                                 
                                             });
@@ -229,7 +229,7 @@ exports.getRevisionNumber = function(filepath, callback){
                             fs.readFile(__dirname + '/rn/'+filename+'/docProps/core.xml', function(err, data) {
                                  if(err){
                                     
-                                    return console.log("This document does not appear to a revision number");
+                                    return console.log("This document does not appear to have a revision number");
                                 
                                 } else{
                                     parser.parseString(data, function (err, result) {
@@ -249,7 +249,7 @@ exports.getRevisionNumber = function(filepath, callback){
                                                     
                                                 }catch(e){
                                                     
-                                                    return console.log("Error occured trying to get revisionNum. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
+                                                    return console.log("Error occured trying to get revisionNumber. If you are seeing this error and cannot resolve the issue, you can open an issue on the Github page");
                                                  }
                                                 
                                             });
@@ -283,7 +283,7 @@ exports.lastModifiedBy = function(filepath, callback){
                             fs.readFile(__dirname + '/lmb/'+filename+'/docProps/core.xml', function(err, data) {
                                  if(err){
                                     
-                                    return console.log("This document does not appear to a specified author");
+                                    return console.log("This document does not appear to have a last specified author");
                                 
                                 } else{
                                     parser.parseString(data, function (err, result) {
@@ -303,7 +303,7 @@ exports.lastModifiedBy = function(filepath, callback){
                                                     
                                                 }catch(e){
                                                     
-                                                    return console.log("Error occured trying to get author name. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
+                                                    return console.log("Error occured trying to get author name. If you are seeing this error and cannot resolve the issue, you can open an issue on the Github page");
                                                  }
                                                 
                                             });
@@ -317,7 +317,7 @@ exports.lastModifiedBy = function(filepath, callback){
                 });
                 
           } else {
-          return console.log("Can't get author name. The file you are passing into the function is not a 'docx' file");
+          return console.log("Can't get last author name. The file you are passing into the function is not a 'docx' file");
       }
 }
 
@@ -355,7 +355,7 @@ exports.getAuthor = function(filepath, callback){
                                                     
                                                 }catch(e){
                                                     
-                                                    return console.log("Error occured trying to get author name. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
+                                                    return console.log("Error occured trying to get author name. If you are seeing this error and cannot resolve the issue, you can open an issue on the Github page");
                                                  }
                                                 
                                             });

@@ -1,7 +1,7 @@
 {
   "name": "docx-extractor",
   "version": "1.0.83",
-  "description": "Extracts comments from docx files",
+  "description": "Extracts comments and other data from docx files",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,7 +17,18 @@
     "comment extractor",
     "docx comments",
     "xml comments",
-    "word document"
+    "word document",
+    "word extractor",
+    "xml extractor",
+    "docx data",
+    "word data",
+    "parse comments",
+    "word parser",
+    "docx parser",
+    "hyperlink extractor",
+    "url extractor",
+    "docx url",
+    "word url"
   ],
   "author": "Nicholas Dangles",
   "license": "ISC",
