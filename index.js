@@ -11,8 +11,8 @@ var parser = new xml2js.Parser()
 
 
 
-exports.templateUsed = function(filepath){
-    var template;
+exports.templateUsed = function(filepath, callback){
+
     if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
                 var newFile = filename+'.zip';
@@ -35,8 +35,9 @@ exports.templateUsed = function(filepath){
                                                 
 
                                                 try{
-                                                    template = pointer.get(jsonData, '/Properties/Template');
-                                                    
+                                                    var templateUsed = pointer.get(jsonData, '/Properties/Template');
+                                                    fse.emptyDir(__dirname+'/tmp/');
+                                                    return callback(templateUsed); 
                                                 }catch(e){
                                                     
                                                     return console.log("Error occured trying to get the template used. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
@@ -50,14 +51,12 @@ exports.templateUsed = function(filepath){
                             });
                         });
                     });
-                    fse.remove(__dirname+'/tmp/');
+                    fse.emptyDir(__dirname+'/tmp/');
                 });
                 
           } else {
           return console.log("Can't get the template used. The file you are passing into the function is not a 'docx' file");
       }
-
-      return template;
 }
 
 
@@ -90,7 +89,7 @@ exports.numberPages = function(filepath, callback){
 
                                                 try{
                                                     var numberPages = pointer.get(jsonData, '/Properties/Pages');
-                                                    return callback(numberPages) 
+                                                    return callback(numberPages);
                                                 }catch(e){
                                                     
                                                     return console.log("Error occured trying to get last time modified. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
@@ -114,7 +113,7 @@ exports.numberPages = function(filepath, callback){
 
 
 
-exports.lastModified = function(filepath){
+exports.lastModified = function(filepath, callback){
 
     if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
@@ -139,7 +138,7 @@ exports.lastModified = function(filepath){
 
                                                 try{
                                                     var lastModified = pointer.get(jsonData, '/cp:coreProperties/dcterms:modified/0/_');
-                                                    return lastModified;
+                                                    return callback(lastModified);
                                                 }catch(e){
                                                     
                                                     return console.log("Error occured trying to get last time modified. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
@@ -161,7 +160,7 @@ exports.lastModified = function(filepath){
       }
 }
 
-exports.timeCreated = function(filepath){
+exports.timeCreated = function(filepath, callback){
 
     if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
@@ -186,7 +185,7 @@ exports.timeCreated = function(filepath){
 
                                                 try{
                                                     var timeCreated = pointer.get(jsonData, '/cp:coreProperties/dcterms:created/0/_');
-                                                    return timeCreated;
+                                                    return callback(timeCreated); 
                                                 }catch(e){
                                                     
                                                     return console.log("Error occured trying to get time created. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
@@ -206,8 +205,6 @@ exports.timeCreated = function(filepath){
           } else {
           return console.log("Can't get time created. The file you are passing into the function is not a 'docx' file");
       }
-
-
 }
 
 
