@@ -68,10 +68,10 @@ exports.numberPages = function(filepath, callback){
     if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
                 var newFile = filename+'.zip';
-                fse.copy(filepath, __dirname+'/tmp/'+filename, function(err){
-                    fs.rename(__dirname+'/tmp/'+filename, __dirname+'/tmp/'+newFile, function(err) {
-                        fs.createReadStream(__dirname+'/tmp/'+newFile).pipe(unzip.Extract({ path: __dirname+'/tmp/'+filename})).on('close', function () {
-                            fs.readFile(__dirname + '/tmp/'+filename+'/docProps/app.xml', function(err, data) {
+                fse.copy(filepath, __dirname+'/np/'+filename, function(err){
+                    fs.rename(__dirname+'/np/'+filename, __dirname+'/np/'+newFile, function(err) {
+                        fs.createReadStream(__dirname+'/np/'+newFile).pipe(unzip.Extract({ path: __dirname+'/np/'+filename})).on('close', function () {
+                            fs.readFile(__dirname + '/np/'+filename+'/docProps/app.xml', function(err, data) {
                                  if(err){
                                     
                                     return console.log("This document does not appear to have a last modified time in its xml");
@@ -80,7 +80,7 @@ exports.numberPages = function(filepath, callback){
                                     parser.parseString(data, function (err, result) {
 
                                         parsedData = JSON.stringify(result);
-                                        var file = __dirname+'/tmp/temp.json';
+                                        var file = __dirname+'/np/temp.json';
                                         jsonfile.writeFile(file, parsedData, function(err){
                                             jsonfile.readFile(file, function(err, obj) {
                                                 var jsonData = JSON.parse(obj);
@@ -90,7 +90,10 @@ exports.numberPages = function(filepath, callback){
 
                                                 try{
                                                     var numberPages = pointer.get(jsonData, '/Properties/Pages');
-                                                    return callback(numberPages);
+                                                    fse.emptyDir(__dirname+'np',function(err){
+                                                        return callback(numberPages);
+                                                    })
+                                                    
                                                 }catch(e){
                                                     
                                                     return console.log("Error occured trying to get last time modified. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
@@ -104,7 +107,7 @@ exports.numberPages = function(filepath, callback){
                             });
                         });
                     });
-                    fse.remove(__dirname+'/tmp/');
+                    
                 });
                 
           } else {
@@ -220,10 +223,10 @@ exports.getRevisionNumber = function(filepath, callback){
     if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
                 var newFile = filename+'.zip';
-                fse.copy(filepath, __dirname+'/tmp/'+filename, function(err){
-                    fs.rename(__dirname+'/tmp/'+filename, __dirname+'/tmp/'+newFile, function(err) {
-                        fs.createReadStream(__dirname+'/tmp/'+newFile).pipe(unzip.Extract({ path: __dirname+'/tmp/'+filename})).on('close', function () {
-                            fs.readFile(__dirname + '/tmp/'+filename+'/docProps/core.xml', function(err, data) {
+                fse.copy(filepath, __dirname+'/rn/'+filename, function(err){
+                    fs.rename(__dirname+'/rn/'+filename, __dirname+'/rn/'+newFile, function(err) {
+                        fs.createReadStream(__dirname+'/rn/'+newFile).pipe(unzip.Extract({ path: __dirname+'/rn/'+filename})).on('close', function () {
+                            fs.readFile(__dirname + '/rn/'+filename+'/docProps/core.xml', function(err, data) {
                                  if(err){
                                     
                                     return console.log("This document does not appear to a revision number");
@@ -232,7 +235,7 @@ exports.getRevisionNumber = function(filepath, callback){
                                     parser.parseString(data, function (err, result) {
 
                                         parsedData = JSON.stringify(result);
-                                        var file = __dirname+'/tmp/temp.json';
+                                        var file = __dirname+'/rn/temp.json';
                                         jsonfile.writeFile(file, parsedData, function(err){
                                             jsonfile.readFile(file, function(err, obj) {
                                                 var jsonData = JSON.parse(obj);
@@ -240,7 +243,10 @@ exports.getRevisionNumber = function(filepath, callback){
 
                                                 try{
                                                     var revisionNum = pointer.get(jsonData, '/cp:coreProperties/cp:revision');
-                                                    return callback(revisionNum) 
+                                                    fse.emptyDir(__dirname+'rn', function(err){
+                                                        return callback(revisionNum);
+                                                    });
+                                                    
                                                 }catch(e){
                                                     
                                                     return console.log("Error occured trying to get revisionNum. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
@@ -254,7 +260,6 @@ exports.getRevisionNumber = function(filepath, callback){
                             });
                         });
                     });
-                    fse.remove(__dirname+'/tmp/');
                 });
                 
           } else {
@@ -272,10 +277,10 @@ exports.lastModifiedBy = function(filepath, callback){
     if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
                 var newFile = filename+'.zip';
-                fse.copy(filepath, __dirname+'/tmp/'+filename, function(err){
-                    fs.rename(__dirname+'/tmp/'+filename, __dirname+'/tmp/'+newFile, function(err) {
-                        fs.createReadStream(__dirname+'/tmp/'+newFile).pipe(unzip.Extract({ path: __dirname+'/tmp/'+filename})).on('close', function () {
-                            fs.readFile(__dirname + '/tmp/'+filename+'/docProps/core.xml', function(err, data) {
+                fse.copy(filepath, __dirname+'/lmb/'+filename, function(err){
+                    fs.rename(__dirname+'/lmb/'+filename, __dirname+'/lmb/'+newFile, function(err) {
+                        fs.createReadStream(__dirname+'/lmb/'+newFile).pipe(unzip.Extract({ path: __dirname+'/lmb/'+filename})).on('close', function () {
+                            fs.readFile(__dirname + '/lmb/'+filename+'/docProps/core.xml', function(err, data) {
                                  if(err){
                                     
                                     return console.log("This document does not appear to a specified author");
@@ -284,7 +289,7 @@ exports.lastModifiedBy = function(filepath, callback){
                                     parser.parseString(data, function (err, result) {
 
                                         parsedData = JSON.stringify(result);
-                                        var file = __dirname+'/tmp/temp.json';
+                                        var file = __dirname+'/lmb/temp.json';
                                         jsonfile.writeFile(file, parsedData, function(err){
                                             jsonfile.readFile(file, function(err, obj) {
                                                 var jsonData = JSON.parse(obj);
@@ -292,7 +297,10 @@ exports.lastModifiedBy = function(filepath, callback){
 
                                                 try{
                                                     var author = pointer.get(jsonData, '/cp:coreProperties/cp:lastModifiedBy');
-                                                    return callback(author) 
+                                                    fse.emptyDir(__dirname+'lmb',function(err){
+                                                        return callback(author);
+                                                    });
+                                                    
                                                 }catch(e){
                                                     
                                                     return console.log("Error occured trying to get author name. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
@@ -306,7 +314,6 @@ exports.lastModifiedBy = function(filepath, callback){
                             });
                         });
                     });
-                    fse.remove(__dirname+'/tmp/');
                 });
                 
           } else {
@@ -321,10 +328,10 @@ exports.getAuthor = function(filepath, callback){
     if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
                 var newFile = filename+'.zip';
-                fse.copy(filepath, __dirname+'/tmp/'+filename, function(err){
-                    fs.rename(__dirname+'/tmp/'+filename, __dirname+'/tmp/'+newFile, function(err) {
-                        fs.createReadStream(__dirname+'/tmp/'+newFile).pipe(unzip.Extract({ path: __dirname+'/tmp/'+filename})).on('close', function () {
-                            fs.readFile(__dirname + '/tmp/'+filename+'/docProps/core.xml', function(err, data) {
+                fse.copy(filepath, __dirname+'/ga/'+filename, function(err){
+                    fs.rename(__dirname+'/ga/'+filename, __dirname+'/ga/'+newFile, function(err) {
+                        fs.createReadStream(__dirname+'/ga/'+newFile).pipe(unzip.Extract({ path: __dirname+'/ga/'+filename})).on('close', function () {
+                            fs.readFile(__dirname + '/ga/'+filename+'/docProps/core.xml', function(err, data) {
                                  if(err){
                                     
                                     return console.log("This document does not appear to have a specified author");
@@ -333,7 +340,7 @@ exports.getAuthor = function(filepath, callback){
                                     parser.parseString(data, function (err, result) {
 
                                         parsedData = JSON.stringify(result);
-                                        var file = __dirname+'/tmp/temp.json';
+                                        var file = __dirname+'/ga/temp.json';
                                         jsonfile.writeFile(file, parsedData, function(err){
                                             jsonfile.readFile(file, function(err, obj) {
                                                 var jsonData = JSON.parse(obj);
@@ -342,7 +349,10 @@ exports.getAuthor = function(filepath, callback){
 
                                                 try{
                                                     var author = pointer.get(jsonData, '/cp:coreProperties/dc:creator');
-                                                    return callback(author) 
+                                                    fse.emptyDir(__dirname+'ga',function(err){
+                                                       return callback(author); 
+                                                   });
+                                                    
                                                 }catch(e){
                                                     
                                                     return console.log("Error occured trying to get author name. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
@@ -356,7 +366,6 @@ exports.getAuthor = function(filepath, callback){
                             });
                         });
                     });
-                    fse.remove(__dirname+'/tmp/');
                 });
                 
           } else {
@@ -374,10 +383,10 @@ exports.extractComments = function(filepath, callback) {
 	if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
                 var newFile = filename+'.zip';
-                fse.copy(filepath, __dirname+'/tmp/'+filename, function(err){
-                    fs.rename(__dirname+'/tmp/'+filename, __dirname+'/tmp/'+newFile, function(err) {
-                        fs.createReadStream(__dirname+'/tmp/'+newFile).pipe(unzip.Extract({ path: __dirname+'/tmp/'+filename})).on('close', function () {
-                            fs.readFile(__dirname + '/tmp/'+filename+'/word/comments.xml', function(err, data) {
+                fse.copy(filepath, __dirname+'/ec/'+filename, function(err){
+                    fs.rename(__dirname+'/ec/'+filename, __dirname+'/ec/'+newFile, function(err) {
+                        fs.createReadStream(__dirname+'/ec/'+newFile).pipe(unzip.Extract({ path: __dirname+'/ec/'+filename})).on('close', function () {
+                            fs.readFile(__dirname + '/ec/'+filename+'/word/comments.xml', function(err, data) {
                                  if(err){
                                     
                                     return console.log("This document does not appear to have any comments");
@@ -386,7 +395,7 @@ exports.extractComments = function(filepath, callback) {
                                     parser.parseString(data, function (err, result) {
 
                                         parsedData = JSON.stringify(result);
-                                        var file = __dirname+'/tmp/temp.json';
+                                        var file = __dirname+'/ec/temp.json';
                                         jsonfile.writeFile(file, parsedData, function(err){
                                             jsonfile.readFile(file, function(err, obj) {
                                                 var jsonData = JSON.parse(obj);
@@ -399,8 +408,10 @@ exports.extractComments = function(filepath, callback) {
                                                     var newComment = test[0].replace(/\W/g, ' ');
                                                     comments[i] = newComment; 
                                                 }catch(e){
+                                                    fse.emptyDir(__dirname+'ec',function(err){
+                                                        return callback(comments);
+                                                    });
                                                     
-                                                    return callback(comments);
                                                  }
                                                 }
                                             });
@@ -411,7 +422,7 @@ exports.extractComments = function(filepath, callback) {
                             });
                         });
                     });
-                    fse.remove(__dirname+'/tmp/');
+                    
                 });
                 
           } else {
@@ -429,10 +440,10 @@ exports.getHyperlinks = function(filepath, callback) {
     if(filepath.indexOf(".docx")>-1){
                 var filename = path.basename(filepath);
                 var newFile = filename+'.zip';
-                fse.copy(filepath, __dirname+'/tmp/'+filename, function(err){
-                    fs.rename(__dirname+'/tmp/'+filename, __dirname+'/tmp/'+newFile, function(err) {
-                        fs.createReadStream(__dirname+'/tmp/'+newFile).pipe(unzip.Extract({ path: __dirname+'/tmp/'+filename})).on('close', function () {
-                            fs.readFile(__dirname + '/tmp/'+filename+'/word/document.xml', function(err, data) {
+                fse.copy(filepath, __dirname+'/ghl/'+filename, function(err){
+                    fs.rename(__dirname+'/ghl/'+filename, __dirname+'/ghl/'+newFile, function(err) {
+                        fs.createReadStream(__dirname+'/ghl/'+newFile).pipe(unzip.Extract({ path: __dirname+'/ghl/'+filename})).on('close', function () {
+                            fs.readFile(__dirname + '/ghl/'+filename+'/word/document.xml', function(err, data) {
                                  if(err){
                                     
                                     return console.log("This document does not appear to have any hyperlinks");
@@ -441,7 +452,7 @@ exports.getHyperlinks = function(filepath, callback) {
                                     parser.parseString(data, function (err, result) {
 
                                         parsedData = JSON.stringify(result);
-                                        var file = __dirname+'/tmp/temp.json';
+                                        var file = __dirname+'/ghl/temp.json';
                                         jsonfile.writeFile(file, parsedData, function(err){
                                             jsonfile.readFile(file, function(err, obj) {
                                                 var jsonData = JSON.parse(obj);
@@ -455,8 +466,10 @@ exports.getHyperlinks = function(filepath, callback) {
                                                         hyperlinks[i] = test;
                                                     } 
                                                 }catch(e){
+                                                    fse.emptyDir(__dirname+'ghl',function(err){
+                                                       return callback(hyperlinks); 
+                                                   });
                                                     
-                                                    return callback(hyperlinks);
                                                  }
                                                 }
                                             });
@@ -467,7 +480,6 @@ exports.getHyperlinks = function(filepath, callback) {
                             });
                         });
                     });
-                    fse.remove(__dirname+'/tmp/');
                 });
                 
           } else {
