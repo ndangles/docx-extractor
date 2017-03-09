@@ -451,7 +451,11 @@ exports.getHyperlinks = function(filepath, callback) {
                             fs.readFile(__dirname + '/ghl/'+filename+'/word/document.xml', function(err, data) {
                                  if(err){
                                     
-                                    return console.log("This document does not appear to have any hyperlinks");
+                                    fse.emptyDir(__dirname+'/ghl/',function(err){
+                                        
+                                        return callback(hyperlinks);
+                                                        
+                                    });
                                 
                                 } else{
                                     parser.parseString(data, function (err, result) {
