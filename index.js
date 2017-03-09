@@ -50,7 +50,7 @@ exports.templateUsed = function(filepath){
                             });
                         });
                     });
-                    fse.emptyDir(__dirname+'/tmp/');
+                    fse.remove(__dirname+'/tmp/');
                 });
                 
           } else {
