@@ -36,7 +36,7 @@ exports.templateUsed = function(filepath){
 
                                                 try{
                                                     var template = pointer.get(jsonData, '/Properties/Template');
-                                                    return console.log(template); 
+                                                    return template; 
                                                 }catch(e){
                                                     
                                                     return console.log("Error occured trying to get the template used. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
