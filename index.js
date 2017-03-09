@@ -473,7 +473,7 @@ exports.getHyperlinks = function(filepath, callback) {
                                                             if(test != null || test != undefined){
                                                                hyperlinks.push(test);
                                                             }
-                                                      }     
+                                                          
                                                          
                                                     }catch(e){
 
