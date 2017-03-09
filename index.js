@@ -408,9 +408,10 @@ exports.extractComments = function(filepath, callback) {
                                                     var newComment = test[0].replace(/\W/g, ' ');
                                                     comments[i] = newComment; 
                                                 }catch(e){
-                                                    break;
+                                                    
                                                     fse.emptyDir(__dirname+'ec',function(err){
                                                         return callback(comments);
+                                                        break;
                                                     });
                                                     
                                                  }
@@ -467,9 +468,10 @@ exports.getHyperlinks = function(filepath, callback) {
                                                         hyperlinks[i] = test;
                                                     } 
                                                 }catch(e){
-                                                    break;
+
                                                     fse.emptyDir(__dirname+'ghl',function(err){
-                                                       return callback(hyperlinks); 
+                                                       return callback(hyperlinks);
+                                                       break; 
                                                    });
                                                     
                                                  }
