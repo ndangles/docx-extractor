@@ -401,12 +401,15 @@ exports.extractComments = function(filepath, callback) {
                                                 var jsonData = JSON.parse(obj);
                                                 
 
-                                                for(i=0; i<2000; i++){
+                                                
 
                                                 try{
-                                                    var test = pointer.get(jsonData, '/w:comments/w:comment/'+i+'/w:p/0/w:r/1/w:t');
-                                                    var newComment = test[0].replace(/\W/g, ' ');
-                                                    comments[i] = newComment; 
+                                                    for(i=0; i<2000; i++){
+                                                        var test = pointer.get(jsonData, '/w:comments/w:comment/'+i+'/w:p/0/w:r/1/w:t');
+                                                        var newComment = test[0].replace(/\W/g, ' ');
+                                                        comments[i] = newComment;
+
+                                                    } 
                                                 }catch(e){
                                                     
                                                     fse.emptyDir(__dirname+'ec',function(err){
@@ -415,7 +418,7 @@ exports.extractComments = function(filepath, callback) {
                                                     });
                                                     
                                                  }
-                                                }
+                                                
                                             });
                                         });
 
@@ -435,59 +438,59 @@ exports.extractComments = function(filepath, callback) {
 
 
 
-exports.getHyperlinks = function(filepath, callback) {    
+// exports.getHyperlinks = function(filepath, callback) {    
       
-    var hyperlinks = [];
+//     var hyperlinks = [];
 
-    if(filepath.indexOf(".docx")>-1){
-                var filename = path.basename(filepath);
-                var newFile = filename+'.zip';
-                fse.copy(filepath, __dirname+'/ghl/'+filename, function(err){
-                    fs.rename(__dirname+'/ghl/'+filename, __dirname+'/ghl/'+newFile, function(err) {
-                        fs.createReadStream(__dirname+'/ghl/'+newFile).pipe(unzip.Extract({ path: __dirname+'/ghl/'+filename})).on('close', function () {
-                            fs.readFile(__dirname + '/ghl/'+filename+'/word/document.xml', function(err, data) {
-                                 if(err){
+//     if(filepath.indexOf(".docx")>-1){
+//                 var filename = path.basename(filepath);
+//                 var newFile = filename+'.zip';
+//                 fse.copy(filepath, __dirname+'/ghl/'+filename, function(err){
+//                     fs.rename(__dirname+'/ghl/'+filename, __dirname+'/ghl/'+newFile, function(err) {
+//                         fs.createReadStream(__dirname+'/ghl/'+newFile).pipe(unzip.Extract({ path: __dirname+'/ghl/'+filename})).on('close', function () {
+//                             fs.readFile(__dirname + '/ghl/'+filename+'/word/document.xml', function(err, data) {
+//                                  if(err){
                                     
-                                    return console.log("This document does not appear to have any hyperlinks");
+//                                     return console.log("This document does not appear to have any hyperlinks");
                                 
-                                } else{
-                                    parser.parseString(data, function (err, result) {
+//                                 } else{
+//                                     parser.parseString(data, function (err, result) {
 
-                                        parsedData = JSON.stringify(result);
-                                        var file = __dirname+'/ghl/temp.json';
-                                        jsonfile.writeFile(file, parsedData, function(err){
-                                            jsonfile.readFile(file, function(err, obj) {
-                                                var jsonData = JSON.parse(obj);
+//                                         parsedData = JSON.stringify(result);
+//                                         var file = __dirname+'/ghl/temp.json';
+//                                         jsonfile.writeFile(file, parsedData, function(err){
+//                                             jsonfile.readFile(file, function(err, obj) {
+//                                                 var jsonData = JSON.parse(obj);
                                                 
 
-                                                for(i=0; i<100; i++){
+//                                                 for(i=0; i<100; i++){
 
-                                                try{
-                                                    var test = pointer.get(jsonData, '/w:document/w:body/w:p/'+i+'/w:hyperlink/w:r/w:t');
-                                                    if(test!=null){
-                                                        hyperlinks[i] = test;
-                                                    } 
-                                                }catch(e){
+//                                                 try{
+//                                                     var test = pointer.get(jsonData, '/w:document/w:body/w:p/'+i+'/w:hyperlink/w:r/w:t');
+//                                                     if(test!=null){
+//                                                         hyperlinks[i] = test;
+//                                                     } 
+//                                                 }catch(e){
 
-                                                    fse.emptyDir(__dirname+'ghl',function(err){
-                                                       return callback(hyperlinks);
-                                                       break; 
-                                                   });
+//                                                     fse.emptyDir(__dirname+'ghl',function(err){
+//                                                        return callback(hyperlinks);
+//                                                        break; 
+//                                                    });
                                                     
-                                                 }
-                                                }
-                                            });
-                                        });
+//                                                  }
+//                                                 }
+//                                             });
+//                                         });
 
-                                    });
-                                }
-                            });
-                        });
-                    });
-                });
+//                                     });
+//                                 }
+//                             });
+//                         });
+//                     });
+//                 });
                 
-          } else {
-          return console.log("Can't get hyperlinks. The file you are passing into the function is not a 'docx' file");
-      }
+//           } else {
+//           return console.log("Can't get hyperlinks. The file you are passing into the function is not a 'docx' file");
+//       }
 
-}
+// }
