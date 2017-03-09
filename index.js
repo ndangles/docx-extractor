@@ -36,7 +36,7 @@ exports.templateUsed = function(filepath){
 
                                                 try{
                                                     var templateUsed = pointer.get(jsonData, '/Properties/Template');
-                                                    return templateUsed 
+                                                    return templateUsed; 
                                                 }catch(e){
                                                     
                                                     return console.log("Error occured trying to get the template used. If you are seeing this error and cannot resolve the issue, contact me at nicholasdangles@gmail.com");
@@ -205,7 +205,7 @@ exports.timeCreated = function(filepath){
           return console.log("Can't get time created. The file you are passing into the function is not a 'docx' file");
       }
 
-  
+
 }
 
 
