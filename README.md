@@ -92,12 +92,3 @@ dxe.someMethod('myfile.docx', function(data){
 - `templateUsed(file, callback)`
 
 	-> Returns the template that was used when creating the document. Example: "Normal.dotm" is the template name of when someone starts a docx file with the blank template.
-
-
-
- Future
- ------
-
- I plan to add more methods in the near future for extracting and parsing other specific data out of the 'docx' xml files. 
-
- My next plan is to add word, character and paragraph count. Although this information is stored in the xml, microsoft recommends against it because it can be inconsistent with the values that the client application(Word gui) shows.
